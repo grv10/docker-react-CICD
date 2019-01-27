@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run grv10/docker-react-cicd npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker-react-cicd"
+  env: "DockerReactCicd-env"
+  bucket_name: "elasticbeanstalk-us-east-2-881223701779"
+  bucket_path: "docker-react-cicd"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: 
+    secure: "$AWS_SECRET_ACCESS_KEY"
