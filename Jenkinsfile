@@ -1,12 +1,9 @@
 pipeline {
     agent { dockerfile true }
     stages {
-        stage('Build') {
-            steps {
-                echo 'Running build automation'
-                sh './gradlew build --no-daemon'
-                archiveArtifacts artifacts: 'dist/trainSchedule.zip'
-            }
+        stage('Build image') {
+            app= docker.build("grv10/docker-react-cicd")
+            echo "Build run"
         }
     }
 }
